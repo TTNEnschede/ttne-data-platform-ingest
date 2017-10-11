@@ -1,0 +1,26 @@
+{
+  "name": "ttne-data-platform-ingest",
+  "version": "1.0.0",
+  "description": "Ingest service for TTN Enschede data platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js | bunyan -o short",
+    "test": "node_modules/.bin/mocha"
+  },
+  "author": "Timothy Sealy",
+  "license": "MIT",
+  "dependencies": {
+    "jsonschema": "^1.1.1",
+    "mongoose": "^4.11.1",
+    "mqtt": "^2.11.0",
+    "restify": "^5.0.0",
+    "restify-errors": "^4.3.0",
+    "restify-router": "^0.4.2",
+    "save": "^2.3.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2",
+    "should": "^11.2.1",
+    "supertest": "^3.0.0"
+  }
+}
