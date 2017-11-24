@@ -4,29 +4,7 @@
     "properties": {
         "app_id": {"type": "string"},
         "dev_id": {"type": "string"},
-        "payload_fields": {
-            "allOf" : [
-                {
-                    "type": "object",
-                    "properties": {
-                        "battery_level": {"type": "number"},
-                        "location": {"$ref": "/IngestLocation"},
-                        "temperature": {"type": "number"},
-                        "barometric_pressure": {"type": "number"},
-                        "humidity": {"type": "number"}
-                    }
-                },
-                {  
-                    "anyOf" : [
-                        {"required" : ["battery_level"]},
-                        {"required" : ["location"]},
-                        {"required" : ["temperature"]},
-                        {"required" : ["barometric_pressure"]},
-                        {"required" : ["humidity"]}
-                    ]
-                }
-            ]
-        }
+        "payload_fields": {"$ref": "/IngestPayload"}
     },
     "required": ["app_id", "dev_id", "payload_fields"]
 }

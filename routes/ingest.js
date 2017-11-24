@@ -12,14 +12,14 @@ const fs            = require('fs')
 var Ingest          = require('./../models/Ingest');
 
 // Read JSON validation schemas from file.
-const location_schema_file = path.join(__dirname, 'validation', 'location_schema.json');
-const location_schema = JSON.parse(fs.readFileSync(location_schema_file, 'utf8'));
+const payload_schema_file = path.join(__dirname, 'validation', 'ingest_schema_payload_cayenne.json');
+const payload_schema = JSON.parse(fs.readFileSync(payload_schema_file, 'utf8'));
 const ingest_schema_file = path.join(__dirname, 'validation', 'ingest_schema.json');
 const schema = JSON.parse(fs.readFileSync(ingest_schema_file, 'utf8'));
 
 // Create validator object.
 var validator = new Validator();
-validator.addSchema(location_schema, '/IngestLocation');
+validator.addSchema(payload_schema, '/IngestPayload');
 
 /**
  * @api {post} /api/ingest Ingest TTN messages

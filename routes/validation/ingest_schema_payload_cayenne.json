@@ -1,0 +1,41 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "/IngestMessage",
+    "type": "object",
+    "description": "A schema for the validation of the TTN Cayenne payload fields.",
+    "definitions": {
+	    "accelerometer": {
+	     	"type": "object",
+	    	"properties": {
+	        	"x": {"type": "number"},
+	        	"y": {"type": "number"},
+	        	"z": {"type": "number"}
+	      	},
+	      	"required": ["x","y","z"]
+	    },
+	    "gps": {
+	    	"type": "object",
+	      	"properties": {
+	        	"latitude": {"type": "number"},
+	        	"longitude": {"type": "number"},
+	        	"altitude": {"type": "integer"}
+	      	},
+	      	"required": ["latitude","longitude"]
+	    }
+	},
+	"patternProperties": {
+	   	"^(digital_(in|out)|luminosity|presence|value)(_\\d{1,3}){0,1}$": {
+	      "type": "integer"
+	    },
+	   	"^(analog_(in|out)|temperature|relative_humidity|barometric_pressure|gyrometer)(_\\d{1,3}){0,1}$": {
+	      "type": "number"
+	    },
+	    "^(accelerometer)(_\\d{1,3}){0,1}$": {
+	    	"$ref": "#/definitions/accelerometer" 
+	    },
+	    "^(gps)(_\\d{1,3}){0,1}$": {
+	    	"$ref": "#/definitions/gps" 
+	    }
+	},
+	"additionalProperties": false
+}
