@@ -150,7 +150,7 @@ describe("* Ingest test",function () {
                 if (err) {
                     return done(err);
                 }
-                res.body.message.should.be.exactly('Ingest message contains 2 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains no payload_fields.');
 
                 done();
             });
@@ -196,7 +196,7 @@ describe("* Ingest test",function () {
                 if (err) {
                     return done(err);
                 }
-                res.body.message.should.be.exactly('Ingest message contains 2 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains 1 validation errors.');
                 
                 done();
             });
@@ -213,7 +213,7 @@ describe("* Ingest test",function () {
                 'dev_id' : 'my_dev_id',
                 'payload_fields' : {
                     'temperature': 25.0,
-                    'humidity' : 800
+                    'relative_humidity' : 800
                 }
             })
             .end(function(err, res) {
@@ -238,7 +238,7 @@ describe("* Ingest test",function () {
                 'dev_id' : 'my_dev_id',
                 'payload_fields' : {
                     'temperature': 25.0,
-                    'humidity' : 800,
+                    'relative_humidity' : 800,
                     'barometric_pressure' : 1000
                 }
             })
@@ -263,9 +263,9 @@ describe("* Ingest test",function () {
                 'dev_id' : 'my_dev_id',
                 'payload_fields' : {
                     'temperature': 25.0,
-                    'humidity' : 800,
+                    'relative_humidity' : 800,
                     'barometric_pressure' : 1000,
-                    'location' : {
+                    'gps' : {
                         'latitude': 52.2345,
                         'longitude': 6.23456
                     }
@@ -292,9 +292,9 @@ describe("* Ingest test",function () {
                 'dev_id' : 'my_dev_id',
                 'payload_fields' : {
                     'temperature': 25.0,
-                    'humidity' : 800,
+                    'relative_humidity' : 800,
                     'barometric_pressure' : 1000,
-                    'location' : {
+                    'gps' : {
                     }
                 }
             })
@@ -305,8 +305,7 @@ describe("* Ingest test",function () {
                 // Validation errors:
                 // 1. Latitude is required.
                 // 2. Longitude is required.
-                // 3. Because of above the allOf is not valid.
-                res.body.message.should.be.exactly('Ingest message contains 3 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains 2 validation errors.');
                 
                 done();
             });
@@ -323,9 +322,9 @@ describe("* Ingest test",function () {
                 'dev_id' : 'my_dev_id',
                 'payload_fields' : {
                     'temperature': 25.0,
-                    'humidity' : 800,
+                    'relative_humidity' : 800,
                     'barometric_pressure' : 1000,
-                    'location' : {
+                    'gps' : {
                         'latitude': 52.2345
                     }
                 }
@@ -336,8 +335,7 @@ describe("* Ingest test",function () {
                 }
                 // Validation errors:
                 // 1. Longitude is required.
-                // 2. Because of above the allOf is not valid.
-                res.body.message.should.be.exactly('Ingest message contains 2 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains 1 validation errors.');
                 
                 done();
             });
