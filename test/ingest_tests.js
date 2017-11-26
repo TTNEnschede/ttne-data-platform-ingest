@@ -11,7 +11,7 @@ describe("* Ingest test",function () {
 
     // Actual tests
     it('should produce an unauthorized error (401) for request without an api key', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .expect('Content-type', /json/)
             .expect(401)
@@ -27,7 +27,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce an error (400) for request with no body', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -44,7 +44,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with empty object', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -61,7 +61,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with empty body', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -78,7 +78,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with only app_id', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -97,7 +97,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with only dev_id', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -116,7 +116,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with app_id and dev_id', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -136,7 +136,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with app_id and dev_id and empty payload_fields', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -157,7 +157,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature)', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -180,7 +180,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with app_id, dev_id and invalid payload_fields (temperatuur)', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -203,7 +203,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature, humidity)', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -228,7 +228,7 @@ describe("* Ingest test",function () {
 
 
     it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature, humidity, pressure)', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -253,7 +253,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature, humidity, pressure, location)', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -282,7 +282,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with app_id, dev_id and invalid payload_fields (empty location)', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
@@ -313,7 +313,7 @@ describe("* Ingest test",function () {
     });
 
     it('should produce a validation error (400) for request with app_id, dev_id and invalid payload_fields (location)', function (done) {
-        server.post('/api/ingest/ttn')
+        server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
             .expect('Content-type', /json/)
