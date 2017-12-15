@@ -50,6 +50,11 @@ router.post('/ingest', function (req, res, next) {
         return next(new errors.BadRequestError({message: 'Ingest message contains no body.'}));
     }
 
+    // If we have empty payload fields then simply skip this message.
+    if (isEmpty(req.body.payload_fields)) {
+        return next(new errors.BadRequestError({message: 'Ingest message contains no payload_fields.'}));
+    }    
+
     // Do validation.
     var validation_result = validator.validate(req.body, schema);
     if (!validation_result.valid) {
@@ -57,11 +62,6 @@ router.post('/ingest', function (req, res, next) {
         return next(new errors.BadRequestError({message: 'Ingest message contains ' + validation_result.errors.length +' validation errors.'}));
     }
 
-    // If we have empty payload fields then simply skip this message.
-    if (isEmpty(req.body.payload_fields)) {
-        return next(new errors.BadRequestError({message: 'Ingest message contains no payload_fields.'}));
-    }
-    
     // Store the raw payload.
     var newIngest = new Ingest({
         api_key : req.headers['apikey'],

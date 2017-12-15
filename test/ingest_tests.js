@@ -43,22 +43,6 @@ describe("* Ingest test",function () {
             });
     });
 
-    it('should produce a validation error (400) for request with empty object', function (done) {
-        server.post('/api/ingest')
-            .set('Accept', 'application/json')
-            .set('apikey', '12345')
-            .expect('Content-type', /json/)
-            .expect(400)
-            .send({})
-            .end(function(err, res) {
-                if (err) {
-                    return done(err);
-                }
-                res.body.message.should.be.exactly('Ingest message contains 3 validation errors.');
-
-                done();
-            });
-    });
 
     it('should produce a validation error (400) for request with empty body', function (done) {
         server.post('/api/ingest')
