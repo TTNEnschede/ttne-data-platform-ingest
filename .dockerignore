@@ -1,0 +1,5 @@
+# Ignore dockerfile (not needed in the container)
+Dockerfile
+
+# Ignore node_modules (will be build by containter anyway)
+node_modules
