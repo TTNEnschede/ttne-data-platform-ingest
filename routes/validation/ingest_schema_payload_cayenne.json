@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "/IngestMessage",
+	"id": "/IngestPayload",
     "type": "object",
     "description": "A schema for the validation of the TTN Cayenne payload fields.",
     "definitions": {
@@ -31,10 +31,10 @@
 	      "type": "number"
 	    },
 	    "^(accelerometer)(_\\d{1,3}){0,1}$": {
-	    	"$ref": "#/definitions/accelerometer" 
+	    	"$ref": "#/definitions/accelerometer"
 	    },
 	    "^(gps)(_\\d{1,3}){0,1}$": {
-	    	"$ref": "#/definitions/gps" 
+	    	"$ref": "#/definitions/gps"
 	    }
 	},
 	"additionalProperties": false
