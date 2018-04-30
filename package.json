@@ -14,6 +14,10 @@
   "author": "Timothy Sealy",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.1",
+    "buffer-shims": "^1.0.0",
+    "bunyan": "^1.8.12",
+    "dotenv": "^5.0.1",
     "jsonschema": "^1.1.1",
     "mongoose": "^4.11.1",
     "mqtt": "^2.11.0",
