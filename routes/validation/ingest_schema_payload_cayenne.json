@@ -27,7 +27,7 @@
 	   	"^(digital_(in|out)|luminosity|presence|value)(_\\d{1,3}){0,1}$": {
 	      "type": "integer"
 	    },
-	   	"^(analog_(in|out)|battery_level|barometric_pressure|gyrometer|relative_humidity|temperature)(_\\d{1,3}){0,1}$": {
+	   	"^(analog_(in|out)|battery_level|barometric_pressure|distance|gyrometer|relative_humidity|temperature)(_\\d{1,3}){0,1}$": {
 	      "type": "number"
 	    },
 	    "^(accelerometer)(_\\d{1,3}){0,1}$": {

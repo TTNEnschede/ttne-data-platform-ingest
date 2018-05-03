@@ -3,7 +3,7 @@
 const config        = require('../config');
 const Validator     = require('jsonschema').Validator;
 const errors        = require('restify-errors');
-const Router        = require('restify-router').Router;  
+const Router        = require('restify-router').Router;
 const router        = new Router();
 const path          = require('path');
 const fs            = require('fs')
@@ -38,8 +38,8 @@ validator.addSchema(payload_schema, '/IngestPayload');
  *    HTTP/1.1 500 Internal Server Error
  *    HTTP/1.1 400 Bad Request
  */
-router.post('/ingest', function (req, res, next) { 
-    
+router.post('/ingest', function (req, res, next) {
+
     // Check if we have an api key
     if (!req.headers['apikey']) {
         return next(new errors.UnauthorizedError({message: 'Missing api key.'}));
@@ -53,7 +53,7 @@ router.post('/ingest', function (req, res, next) {
     // If we have empty payload fields then simply skip this message.
     if (isEmpty(req.body.payload_fields)) {
         return next(new errors.BadRequestError({message: 'Ingest message contains no payload_fields.'}));
-    }    
+    }
 
     // Do validation.
     var validation_result = validator.validate(req.body, schema);
@@ -74,7 +74,7 @@ router.post('/ingest', function (req, res, next) {
             log.error("Error saving ingest: ", err);
             return next(new errors.InternalError({message: err.message}));
         }
-        
+
         if (config.mqtt.enabled) {
             // Publish to MQTT broker for further processing.
             mqtt_client.publish(config.mqtt.ingest_topic, JSON.stringify(ingestDocument), { qos: config.mqtt.qos });
@@ -89,7 +89,7 @@ router.post('/ingest', function (req, res, next) {
 });
 
 function isEmpty(obj) {
-    return Object.keys(obj).length == 0
+    return !obj || Object.keys(obj).length == 0
 }
 
 module.exports = router;

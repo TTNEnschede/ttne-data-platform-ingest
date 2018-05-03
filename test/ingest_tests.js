@@ -26,7 +26,7 @@ describe("* Ingest test",function () {
             });
     });
 
-    it('should produce an error (400) for request with no body', function (done) {
+    it('should produce a validation error (400) for request with no body', function (done) {
         server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
@@ -55,7 +55,7 @@ describe("* Ingest test",function () {
                 if (err) {
                     return done(err);
                 }
-                res.body.message.should.be.exactly('Ingest message contains 3 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains no payload_fields.');
 
                 done();
             });
@@ -74,7 +74,7 @@ describe("* Ingest test",function () {
                 if (err) {
                     return done(err);
                 }
-                res.body.message.should.be.exactly('Ingest message contains 2 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains no payload_fields.');
 
                 done();
             });
@@ -93,7 +93,7 @@ describe("* Ingest test",function () {
                 if (err) {
                     return done(err);
                 }
-                res.body.message.should.be.exactly('Ingest message contains 2 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains no payload_fields.');
 
                 done();
             });
@@ -113,7 +113,7 @@ describe("* Ingest test",function () {
                 if (err) {
                     return done(err);
                 }
-                res.body.message.should.be.exactly('Ingest message contains 1 validation errors.');
+                res.body.message.should.be.exactly('Ingest message contains no payload_fields.');
 
                 done();
             });
@@ -140,7 +140,7 @@ describe("* Ingest test",function () {
             });
     });
 
-    it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature)', function (done) {
+    it('should produce success (200) for request with app_id, dev_id and payload_fields (temperature)', function (done) {
         server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
@@ -158,7 +158,7 @@ describe("* Ingest test",function () {
                     return done(err);
                 }
                 res.body.result.should.be.exactly('Ingested!');
-                
+
                 done();
             });
     });
@@ -181,12 +181,12 @@ describe("* Ingest test",function () {
                     return done(err);
                 }
                 res.body.message.should.be.exactly('Ingest message contains 1 validation errors.');
-                
+
                 done();
             });
     });
 
-    it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature, humidity)', function (done) {
+    it('should produce success (200) for request with app_id, dev_id and payload_fields (temperature, humidity)', function (done) {
         server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
@@ -205,13 +205,13 @@ describe("* Ingest test",function () {
                     return done(err);
                 }
                 res.body.result.should.be.exactly('Ingested!');
-                
+
                 done();
             });
     });
 
 
-    it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature, humidity, pressure)', function (done) {
+    it('should produce success (200) for request with app_id, dev_id and payload_fields (temperature, humidity, pressure)', function (done) {
         server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
@@ -231,12 +231,12 @@ describe("* Ingest test",function () {
                     return done(err);
                 }
                 res.body.result.should.be.exactly('Ingested!');
-                
+
                 done();
             });
     });
 
-    it('should produce a validation error (200) for request with app_id, dev_id and payload_fields (temperature, humidity, pressure, location)', function (done) {
+    it('should produce success (200) for request with app_id, dev_id and payload_fields (temperature, humidity, pressure, location)', function (done) {
         server.post('/api/ingest')
             .set('Accept', 'application/json')
             .set('apikey', '12345')
@@ -260,7 +260,7 @@ describe("* Ingest test",function () {
                     return done(err);
                 }
                 res.body.result.should.be.exactly('Ingested!');
-                
+
                 done();
             });
     });
@@ -290,7 +290,7 @@ describe("* Ingest test",function () {
                 // 1. Latitude is required.
                 // 2. Longitude is required.
                 res.body.message.should.be.exactly('Ingest message contains 2 validation errors.');
-                
+
                 done();
             });
     });
@@ -320,7 +320,56 @@ describe("* Ingest test",function () {
                 // Validation errors:
                 // 1. Longitude is required.
                 res.body.message.should.be.exactly('Ingest message contains 1 validation errors.');
-                
+
+                done();
+            });
+    });
+
+
+    it('should produce success (200) for request with app_id, dev_id and payload_fields (distance)', function (done) {
+        server.post('/api/ingest')
+            .set('Accept', 'application/json')
+            .set('apikey', '12345')
+            .expect('Content-type', /json/)
+            .expect(200)
+            .send({
+                'app_id' : 'my_app_id',
+                'dev_id' : 'my_dev_id',
+                'payload_fields' : {
+                    'distance': 25.0
+                }
+            })
+            .end(function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+                res.body.result.should.be.exactly('Ingested!');
+
+                done();
+            });
+    });
+
+    it('should produce a validation error (400) for request with app_id, dev_id and invalid payload_fields (distance)', function (done) {
+        server.post('/api/ingest')
+            .set('Accept', 'application/json')
+            .set('apikey', '12345')
+            .expect('Content-type', /json/)
+            .expect(400)
+            .send({
+                'app_id' : 'my_app_id',
+                'dev_id' : 'my_dev_id',
+                'payload_fields' : {
+                    'distance': '25.0'
+                }
+            })
+            .end(function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+                // Validation errors:
+                // 1. Longitude is required.
+                res.body.message.should.be.exactly('Ingest message contains 1 validation errors.');
+
                 done();
             });
     });
