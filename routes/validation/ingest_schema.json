@@ -4,7 +4,7 @@
     "properties": {
         "app_id": {"type": "string"},
         "dev_id": {"type": "string"},
-        "payload_fields": {"$ref": "/IngestPayload"}
+        "payload_fields": {"type": "object"}
     },
     "required": ["app_id", "dev_id", "payload_fields"]
 }
